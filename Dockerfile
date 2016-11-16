@@ -14,12 +14,6 @@ setxkbmap sudo util-linux dbus wireshark ttf-freefont xauth supervisor \
 
 ADD etc /etc
 
-RUN addgroup alpine \
-&& adduser  -G alpine -s /bin/sh -D alpine \
-&& echo "alpine:alpine" | /usr/sbin/chpasswd \
-&& echo "alpine    ALL=(ALL) ALL" >> /etc/sudoers \
-&& chown -R alpine:alpine /home/alpine
-
 RUN xrdp-keygen xrdp auto
 RUN sed -i '/TerminalServerUsers/d' /etc/xrdp/sesman.ini \
 && sed -i '/TerminalServerAdmins/d' /etc/xrdp/sesman.ini
