@@ -1,25 +1,29 @@
-FROM danielguerra/alpine-sshdx
+FROM alpine:edge
 
-
-ADD apk /tmp/apk
-RUN cp /tmp/apk/.abuild/-57cfc5fa.rsa.pub /etc/apk/keys
-
+# add packages
+RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
 RUN apk --update --no-cache add xrdp xvfb alpine-desktop xfce4 thunar-volman \
-faenza-icon-theme slim xf86-input-synaptics xf86-input-mouse xf86-input-keyboard \
-setxkbmap sudo util-linux dbus wireshark ttf-freefont xauth supervisor \
-&& apk add /tmp/apk/ossp-uuid-1.6.2-r0.apk \
-&& apk add /tmp/apk/ossp-uuid-dev-1.6.2-r0.apk \
-&& apk add /tmp/apk/x11vnc-0.9.13-r0.apk \
+faenza-icon-theme paper-gtk-theme paper-icon-theme slim xf86-input-synaptics xf86-input-mouse xf86-input-keyboard \
+setxkbmap openssh util-linux dbus wireshark ttf-freefont xauth supervisor x11vnc \
+util-linux dbus ttf-freefont xauth xf86-input-keyboard sudo \
 && rm -rf /tmp/* /var/cache/apk/*
 
+# add scripts/config
 ADD etc /etc
+ADD docker-entrypoint.sh /bin
 
+# prepare user alpine
+RUN addgroup alpine \
+&& adduser  -G alpine -s /bin/sh -D alpine \
+&& echo "alpine:alpine" | /usr/sbin/chpasswd \
+&& echo "alpine    ALL=(ALL) ALL" >> /etc/sudoers
+ADD alpine /home/alpine
+RUN chown -R alpine:alpine /home/alpine
+
+# prepare xrdp key
 RUN xrdp-keygen xrdp auto
-RUN sed -i '/TerminalServerUsers/d' /etc/xrdp/sesman.ini \
-&& sed -i '/TerminalServerAdmins/d' /etc/xrdp/sesman.ini
 
 EXPOSE 3389 22
-#WORKDIR /home/alpine
-#USER alpine
-ENTRYPOINT ["docker-entrypoint.sh"]
+VOLUME ["/etc/ssh"]
+ENTRYPOINT ["/bin/docker-entrypoint.sh"]
 CMD ["/usr/bin/supervisord","-c","/etc/supervisord.conf"]
