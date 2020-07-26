@@ -9,7 +9,7 @@ Sessions run in firejail for security. Chromium sandbox is disabled.
 # Start the server
 
 ```bash
-docker run -d --name rdp -p 3389:3389 danielguerra/alpine-xfce4-xrdp
+docker run -d --name rdp --shm-size 1g -p 3389:3389 danielguerra/alpine-xfce4-xrdp
 ```
 
 # Connect with your favorite rdp client
