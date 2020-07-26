@@ -1,17 +1,30 @@
 # About
 
-Alpine linux xfce4 rdp server
+Alpine linux xrdp server with xfce4 rdp server with vlc and chromium.
+The xrdp audio is working and everything runs unprivileged.
+Sessions run in firejail for security. Chromium sandbox is disabled.
 
-# Usage
 
-Start the server
+
+# Start the server
+
 ```bash
-docker run -d --shm-size 1g --name rdp -p 3389:3389 danielguerra/alpine-xfce4-xrdp
+docker run -d --name rdp -p 3389:3389 danielguerra/alpine-xfce4-xrdp
 ```
 
-*note --shm-size 1g is for firefox, without it it crashes
-
-Connect with your favorite rdp client
+# Connect with your favorite rdp client
 
 User: alpine
 Pass: alpine
+
+# Change the alpine user password
+
+```bash
+docker exec -ti rdp passwd alpine
+```
+
+# Add users
+
+```bash
+docker exec -ti rdp adduser myuser
+```
