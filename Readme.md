@@ -1,7 +1,7 @@
 # About
 
-Alpine linux xrdp server with xfce4 rdp server with vlc and chromium.
-The xrdp audio is working and everything runs unprivileged.
+Alpine linux multi-user xrdp server with xfce4 rdp server with vlc and chromium.
+The xrdp audio is working,including microphone and everything runs unprivileged.
 Sessions run in firejail for security. Chromium sandbox is disabled.
 
 
