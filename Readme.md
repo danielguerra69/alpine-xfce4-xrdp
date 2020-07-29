@@ -12,6 +12,8 @@ Sessions run in firejail for security. Chromium sandbox is disabled.
 docker run -d --name rdp --shm-size 1g -p 3389:3389 danielguerra/alpine-xfce4-xrdp
 ```
 
+(WARNING: use the --shm-size 1g or chromium will crash)
+
 # Connect with your favorite rdp client
 
 User: alpine
