@@ -78,6 +78,7 @@ RUN apk --update --no-cache add \
     ttf-freefont \
     util-linux \
     vim \
+    wireshark \
     vlc-qt \
     xauth \
     xf86-input-keyboard \
