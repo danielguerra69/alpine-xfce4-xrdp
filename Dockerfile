@@ -24,7 +24,7 @@ RUN abuild rootpkg
 WORKDIR /tmp/aports/community/pulseaudio/src/pulseaudio-13.0
 RUN cp ./output/config.h .
 
-WORKDIR /tmp/aports/testing/xorgxrdp
+WORKDIR /tmp/aports/community/xorgxrdp
 RUN abuild fetch
 RUN abuild unpack
 RUN abuild deps
@@ -34,7 +34,6 @@ RUN abuild rootpkg
 
 ARG XRDPPULSE_VER="0.4"
 ENV XRDPPULSE_VER=${XRDPPULSE_VER}
-RUN echo sdk | sudo -S ls && echo "echo 'http://dl-cdn.alpinelinux.org/alpine/edge/testing'>>/etc/apk/repositories" | sudo sh
 RUN echo sdk | sudo -S apk update
 RUN echo sdk | sudo -S apk add pulseaudio-dev xrdp-dev xorgxrdp-dev
 WORKDIR /tmp
@@ -53,7 +52,6 @@ RUN ls -al  /tmp/pulseaudio-module-xrdp-0.4/src/.libs/module-xrdp-source.so
 
 FROM alpine:edge
 MAINTAINER Daniel Guerra
-RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing">>/etc/apk/repositories
 
 RUN apk --update --no-cache add \
     alpine-conf \
