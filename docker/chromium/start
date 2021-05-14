@@ -1,0 +1,1 @@
+ssh -R 4713:127.0.0.1:4713 -X -p 4849 alpine@192.168.99.105 PULSE_SERVER="127.0.0.1:4713" dbus-launch chromium-browser

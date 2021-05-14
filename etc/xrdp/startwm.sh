@@ -106,6 +106,6 @@ wm_start()
 # includes
 # auth       required     pam_env.so readenv=1
 
-firejail xfce4-session
+mate-session
 
 exit 1

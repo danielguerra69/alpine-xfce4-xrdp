@@ -33,7 +33,7 @@ fi
 mkdir -p /var/run/sshd
 
 # generate machine-id
-uuidgen > /etc/machine-id
+dbus-uuidgen > /etc/machine-id
 
 # set keyboard for all sh users
 echo "export QT_XKB_CONFIG_ROOT=/usr/share/X11/locale" >> /etc/profile
